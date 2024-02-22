@@ -1,0 +1,56 @@
+﻿<Window x:Class="BackEndWpf.StudentSelectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BackEndWpf"
+        mc:Ignorable="d"
+        Title="StudentSelect" Height="450" Width="800"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded">
+    <Grid x:Name="grid" Background="#FF050D4E">
+        <StackPanel x:Name="RegisterPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Width="750" Height="400">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="student" Style="{StaticResource textBlockStyle1}"/>
+                <TextBlock Text="'s Selection" Style="{StaticResource textBlockStyle1}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBlock Text="Course" Margin="0,0,60,0" Foreground="MediumVioletRed" FontSize="20" Padding="5,0,0,0"/>
+                <TextBlock Text="Teacher" Margin="0,0,75,0" Foreground="MediumVioletRed" FontSize="20"/>
+                <TextBlock Text="Start" Margin="0,0,73,0" Foreground="MediumVioletRed" FontSize="20"/>
+                <TextBlock Text="End" Margin="0,0,95,0" Foreground="MediumVioletRed" FontSize="20"/>
+                <TextBlock Text="Hour" Margin="0,0,60,0" Foreground="MediumVioletRed" FontSize="20"/>
+                <TextBlock Text="Location" Foreground="MediumVioletRed" FontSize="20"/>
+            </StackPanel>
+            <Separator/>
+            <ListBox x:Name="stuSelectList" 
+                     Margin="0,10,0,0"
+                     VerticalAlignment="Top"
+                     Background="#200F53"
+                     BorderThickness="0">
+                <ListBox.Style>
+                    <Style TargetType="ListBox">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="#BCBEE0"/>
+                        <Setter Property="FontFamily" Value="Montserrat"/>
+                        <Setter Property="FontSize" Value="15"/>
+                    </Style>
+                </ListBox.Style>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding CourseName}" Width="110" Margin="0,0,30,0" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding TeacherName}" Width="75" Margin="0,0,50,0"/>
+                            <TextBlock Text="{Binding SDate, StringFormat='yyyy/MM/dd'}" Width="77" Margin="0,0,40,0"/>
+                            <TextBlock Text="{Binding EDate, StringFormat='yyyy/MM/dd'}" Width="77" Margin="0,0,65,0"/>
+                            <TextBlock Text="{Binding Hour}" Width="50" Margin="0,0,55,0"/>
+                            <TextBlock Text="{Binding Location}" Width="90"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </Grid>
+
+</Window>

@@ -1,0 +1,308 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title> Course </title>
+	<link rel="stylesheet" href="~/lib/bootstrap-5.2.2/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" />
+
+	<style type="text/css">
+		.T2B {
+			background: -webkit-linear-gradient(black,gray);
+			background: -o-linear-gradient(black,gray);
+			background: -moz-linear-gradient(black,gray);
+			background: linear-gradient(black,gray);
+		}
+
+		#logo-placeholder {
+			background: url('\\images\\headbg.jpg') 50% 50% no-repeat;
+			background-size: cover;
+		}
+
+		#body {
+			background: url('\\images\\bg.png') repeat fixed;
+		}
+
+		main {
+			backdrop-filter: blur(3px);
+		}
+
+		.bd-callout {
+			padding: 1.25rem;
+			margin-top: 1.25rem;
+			margin-bottom: 1.25rem;
+			background-color: var(--bd-callout-bg, var(--bs-gray-100));
+			border-left: 0.25rem solid var(--bd-callout-border, var(--bs-gray-300));
+			--bd-callout-bg: rgba(192,192,192, .6);
+			--bd-callout-border: rgba(112,128,144, .8);
+			border-radius: 20px;
+		}
+	</style>
+
+</head>
+<body id="body">
+
+	@*Header of this web*@
+	<div class="fixed-top">
+		<div id="logo-placeholder" style="height: 150px;">
+		</div>
+		<header>
+			<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-4">
+				<div class="container" style="padding-left: 20px; padding-right: 20px;">
+					<img src="~/images/home.svg" height="30px" />
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" asp-controller="Course" asp-action="Index">Home</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#"></a>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Dropdown
+								</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" asp-controller="Test">Section 1</a></li>
+									<li><a class="dropdown-item"> Section 2 </a></li>
+									<li><hr class="dropdown-divider"></li>
+									<li><a class="dropdown-item" href="#">Something else here</a></li>
+								</ul>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link disabled">Disabled</a>
+							</li>
+						</ul>
+						@*						<form class="d-flex" role="search">
+						<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-success" type="submit">Search</button>
+						</form>*@
+						@{
+							if (Context.User.Identity.IsAuthenticated == true)
+							{
+								<div class="dropdown" style="margin-left: 50px;">
+									<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+										@Context.User.Identity.Name
+									</button>
+									<ul class="dropdown-menu">
+										<li><a class="dropdown-item" asp-controller="StudentSelect" asp-action="Index">Shopping</a></li>
+										<li><a class="dropdown-item" asp-controller="Profile" asp-action="Index">Change Password</a></li>
+										<li><a class="dropdown-item" asp-controller="Profile" asp-action="ModifyData">Modify</a></li>
+										<li><hr class="dropdown-divider"></li>
+										<li><a class="dropdown-item" asp-action="Logout" asp-controller="Login">Sign Out</a></li>
+									</ul>
+								</div>
+							}
+							else
+							{
+								<div class="text-end" style="margin-left: 50px;">
+									<a class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" id="Login">Login</a>
+									<a type="button" class="btn btn-warning" asp-action="Index" asp-controller="Register">Sign-up</a>
+								</div>
+							}
+						}
+					</div>
+				</div>
+			</nav>
+		</header>
+	</div>
+
+	<main role="main" class="container pb-3" style="padding-left: 40px; padding-right: 40px; margin-top: 207px">
+		@RenderBody()
+	</main>
+
+	@*Login Page*@
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color: #BABABA">
+					<h5 class="modal-title" id="exampleModalLabel" style="color: white;">Login</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form asp-controller="Login" asp-action="LoginCheck" method="post" id="form">
+						<div class="form-outline mb-4">
+							@if (TempData["Login"] != null)
+							{
+								if (TempData["Login"].ToString() == "fail")
+								{
+									<h4 style="color: red;"> Error! The Email or Password is incorrect! </h4>
+									<br />
+								}
+							}
+							<input type="email" id="form2Example1" class="form-control" name="email" />
+							<label class="form-label" for="form2Example1">Email address</label>
+						</div>
+						<div class="form-outline mb-4">
+							<input type="password" id="form2Example2" class="form-control" name="password" />
+							<label class="form-label" for="form2Example2">Password</label>
+						</div>
+
+						<!-- 2 column grid layout for inline styling -->
+						<div class="row mb-4">
+							<div class="col d-flex justify-content-center">
+								<!-- Checkbox -->
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+									<label class="form-check-label" for="form2Example31"> Remember me </label>
+								</div>
+							</div>
+
+							<div class="col">
+								<!-- Simple link -->
+								<a href="#!">Forgot password?</a>
+							</div>
+						</div>
+						<div class="container">
+							<button type="button" onclick="submitButton()" class="btn btn-primary" style="width: 200px; margin-left: 25%;">Sign in</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	@*Course Description*@
+	@{
+		if (TempData["PrintCourse"] is true)
+		{
+			for (int i = 0; i < (int)TempData["Count"]; i++)
+			{
+			//This is for description
+				<div class="modal fade" id="@TempData[i.ToString()]" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h1 class="modal-title fs-5" id="exampleModalLabel">Course Description</h1>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								@{
+									if (string.IsNullOrEmpty(TempData["des" + i.ToString()].ToString()))
+									{
+										<h5> No Description </h5>									
+									}
+								}
+								@TempData["des" + i.ToString()].ToString()
+							</div>
+						</div>
+					</div>
+				</div>
+
+				//This is for confirmation buying
+				if (Context.User.Identity.IsAuthenticated)
+				{
+					<div class="modal fade" id="@TempData["form" + i.ToString()]" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="exampleModalLabel">Notice</h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									Are you sure to buy class @TempData["cou" + i.ToString()]
+								</div>
+								<div class="modal-footer">
+									<form asp-action="Index" asp-controller="StudentSelect" method="post">
+										<input type="hidden" name="courseID" value="@TempData[i.ToString()]" />
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+										<button type="submit" class="btn btn-primary">Sure to buy</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				}
+			}
+		}
+	}
+
+	<script>
+
+		document.getElementById("form2Example1").onkeydown = function (event) {
+			if (event.keyCode == 13) {
+				submitButton();
+			};
+		};
+
+		document.getElementById("form2Example2").onkeydown = function (event) {
+			if (event.keyCode == 13) {
+				submitButton();
+			};
+		};
+
+		var email = document.getElementById("form2Example1");
+		var pwd = document.getElementById("form2Example2");
+		function submitButton() {
+			if (email.value == "") {
+				alert("Email is empty!");
+			}
+			else {
+				if (pwd.value == "") {
+					alert("Password is empty!");
+				}
+				else {
+					document.getElementById("form").submit();
+				}
+			}
+		}
+	</script>
+
+	<footer class="border-top footer text-muted T2B">
+		<div class="container">
+			&copy; 2022 - MVCproject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+		</div>
+	</footer>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap-5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@RenderSection("Scripts", required: false)
+
+	@if (TempData["Login"] != null)
+	{
+		if (TempData["Login"].ToString() == "fail")
+		{
+			<script>
+				$(window).ready(() => {
+					$('#exampleModal').modal('show');
+				})
+			</script>
+		}
+	}
+
+	@*This is for error stuselect message*@
+	@if (TempData["stuselect"] != null)
+	{
+		<div class="modal fade" id="StuError" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">Error</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						@if (TempData["stuselect"].ToString() == "duplicated")
+						{
+							<p>Error! @TempData["stuselect"].ToString() selection!</p>
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			$(window).ready(() => {
+				$('#StuError').modal('show');
+			})
+		</script>
+	}
+
+</body>
+</html>
+

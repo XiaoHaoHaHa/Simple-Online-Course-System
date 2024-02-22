@@ -1,0 +1,166 @@
+﻿<Page x:Class="BackEndWpf.ClassPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BackEndWpf"
+      xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ClassPage">
+
+    <Grid x:Name="Detail">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Top"
+                        Grid.Column="0">
+                <fa:FontAwesome Icon="Search" Height="20" Width="20" Foreground="{StaticResource plainTextColor3}"/>
+                <TextBlock Style="{StaticResource textBlockStyle1}" 
+                           FontSize="17" 
+                           Margin="5,5,0,0" 
+                           Text="Course:" />
+                <TextBox x:Name="course" Style="{StaticResource textBoxStyle1}"/>
+                <TextBlock Style="{StaticResource textBlockStyle1}" 
+                           FontSize="17" 
+                           Margin="5,5,0,0" 
+                           Text="Teacher:" />
+                <TextBox x:Name="teacher" Style="{StaticResource textBoxStyle1}"/>
+            </StackPanel>
+
+            <Button Grid.Column="1"                            
+                            Content="Search"                            
+                            FontSize="12"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            BorderThickness="0"
+                            Foreground="White"
+                            VerticalAlignment="Top"
+                            Click="Search_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#773DFF"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Height="30"
+                                            CornerRadius="15"
+                                            Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"                                                      
+                                                          HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#836EFB"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
+
+        <Border Grid.Row="1"
+                Background="#200F53"
+                CornerRadius="10" 
+                Padding="10">
+
+            <DataGrid x:Name="ClassList"
+                  ColumnWidth="*"
+                  Background="#200F53"
+                  BorderThickness="0"
+                  CanUserReorderColumns="False" 
+                  IsReadOnly="True" ItemsSource="{Binding}" 
+                  AutoGenerateColumns="False"
+                  SelectionChanged="ClassList_SelectionChanged">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="#BCBEE0"/>
+                        <Setter Property="Padding" Value="10,0,0,10"/>
+                        <Setter Property="FontFamily" Value="Montserrat"/>
+                        <Setter Property="FontSize" Value="20"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontFamily" Value="Montserrat"/>
+                        <Setter Property="FontSize" Value="15"/>
+                        <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick" />
+                    </Style>
+                </DataGrid.RowStyle>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding CourseName}" Width="1*" Header="Course" HeaderStringFormat="Test"/>
+                    <DataGridTextColumn Binding="{Binding TeacherName}" Width="1*" Header="Teacher"/>
+                    <DataGridTextColumn Binding="{Binding SDate, StringFormat='yyyy / MM / dd'}" Width="1*" Header="Start Day"/>
+                    <DataGridTextColumn Binding="{Binding EDate, StringFormat='yyyy / MM / dd'}" Width="1*" Header="End Day"/>
+                    <DataGridTextColumn Binding="{Binding Location}" Width="1*" Header="Location"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <Grid Grid.Row="2" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <WrapPanel Orientation="Horizontal"
+                        VerticalAlignment="Top"                      
+                        Grid.Column="0">
+                <!--<fa:FontAwesome Icon="UserCircle" Height="20" Width="20" Foreground="{StaticResource plainTextColor3}"/>-->
+                <TextBlock Style="{StaticResource textBlockStyle1}" 
+                           FontSize="17" 
+                           Margin="5,5,0,0" 
+                           Text="Start Day: " />
+                <DatePicker SelectedDate="{Binding Path=SDate, TargetNullValue={x:Static sys:DateTime.Now}}"/>
+                <!--<fa:FontAwesome Icon="PhoneSquare" Height="20" Width="20" Foreground="{StaticResource plainTextColor3}"/>-->
+                <TextBlock Style="{StaticResource textBlockStyle1}" 
+                           FontSize="17" 
+                           Margin="5,5,0,0" 
+                           Text="End Day: " />
+                <DatePicker SelectedDate="{Binding Path=EDate, TargetNullValue={x:Static sys:DateTime.Now}}"/>
+                <TextBlock Style="{StaticResource textBlockStyle1}" 
+                           FontSize="17" 
+                           Margin="5,5,0,0" 
+                           Text="Location:" />
+                <TextBox x:Name="location" Text="{Binding Location}" Style="{StaticResource textBoxStyle1}" Width="100" MaxLength="5"/>
+
+                <Button Style="{StaticResource mainPageBtnModify}"                        
+                        Content="Modify" 
+                        Width="100" 
+                        Margin="50,0,0,0"
+                        Cursor="Hand"
+                        Click="Modify"/>
+                <Button Style="{StaticResource mainPageBtnDelete}" 
+                        Content="Delete" 
+                        Width="100" 
+                        Margin="30,0,0,0" 
+                        Cursor="Hand"
+                        Click="DeleteClick"/>
+                <Button Style="{StaticResource mainPageBtnAdd}" 
+                        Content="Add Class" 
+                        Width="100" 
+                        Margin="30,0,0,0"
+                        Cursor="Hand"
+                        Click="AddClick"/>
+            </WrapPanel>
+
+        </Grid>
+    </Grid>
+
+</Page>

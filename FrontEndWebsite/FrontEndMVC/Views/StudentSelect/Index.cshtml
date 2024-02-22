@@ -1,0 +1,53 @@
+﻿@using CoreLib.ClientViewModel;
+@model List<StudentSelectModel>;
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<div class="bd-callout" style="margin-bottom: 50px">
+	<h3> <strong>My Course Selection</strong> </h3>
+</div>
+
+<div class="card" style="background: wheat;">
+    <table class="table table-striped table-secondary">
+      <thead>
+        <tr>
+          <th scope="col"> </th>
+          <th scope="col">Course</th>
+          <th scope="col">Teacher</th>
+          <th scope="col">Hour</th>
+          <th scope="col">StartDate</th>
+          <th scope="col">EndDate</th>
+          <th scope="col">Location</th>
+          <th scope="col"> </th>
+        </tr>
+      </thead>
+      <tbody>
+            @if (Model.Count > 0)
+            { 
+                for (int i = 0; i <Model.Count; i++)
+                {
+                    <form asp-action="DeleteSelect" asp-controller="StudentSelect" method="post" id="DeleteForm">
+                        <input type="hidden" name="rowSelectID" value="@Model[i].Id.ToString()"/>
+                        <tr>
+                            <th scope="row">@(i+1)</th>
+                            <td>@Model[i].CourseName</td>
+                            <td>@Model[i].TeacherName</td>
+                            <td>@Model[i].Hour</td>
+                            <td>@Model[i].sDate</td>
+                            <td>@Model[i].eDate</td>
+                            <td>@Model[i].Loaction</td>
+                        <td> <button class="btn btn-danger" name="@Model[i].Id.ToString()" type="submit"> Delete </button> </td>
+                        </tr>
+                    </form>
+                }          
+            }
+        </tbody>>
+    </table>
+    @if (Model.Count == 0)
+    {
+        <h4 style="align-items: center; color: red;"> No Course </h4>
+    }
+</div>
+

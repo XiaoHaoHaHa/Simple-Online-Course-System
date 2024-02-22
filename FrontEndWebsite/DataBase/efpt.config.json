@@ -1,0 +1,57 @@
+﻿{
+   "CodeGenerationMode": 1,
+   "ContextClassName": "TainanNetContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": "DB",
+   "OutputPath": "Tables",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "DataBase",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[Class]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Course]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Student]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[StuSelect]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Teacher]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "DESKTOP-L5EF6Q9.TainanNet",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false,
+   "UseT4": false
+}
