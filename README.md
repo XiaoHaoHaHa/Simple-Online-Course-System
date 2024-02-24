@@ -99,7 +99,7 @@ Go to browser and request `https://localhost:5001`
 
 The main section shows the classes you just created!  
 Check out the demonstration video 👇👇👇  
-[![mvcdemo](https://drive.fife.usercontent.google.com/u/0/d/12zTnMommy4Zy2i98V2B0CJsSL4kD8LgM=w200-h190-p-k-rw-v1-nu-iv1)](https://drive.google.com/file/d/12zTnMommy4Zy2i98V2B0CJsSL4kD8LgM/view?usp=sharing)
+https://github.com/XiaoHaoHaHa/Simple-Online-Course-System/assets/58059591/46412c84-2ba7-4aa4-b9ed-9f0d0f5e063f
 
 ## Api
 The FrontEndWebsite(Asp.net MVC) is server side rendering by using `Razor` to display screen while I provided a web api to let front-end developer access this system.
