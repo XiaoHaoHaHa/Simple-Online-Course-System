@@ -13,6 +13,9 @@ Simulating an Online-Course system which people can purchase on website.
 - T-SQL database manipulation, Ado.net
 - Entity Framework (ORM)
 
+**Reference**
+- [RJ Code UI design](https://www.youtube.com/watch?v=pZGcRHgmn8k)
+
 ## Catalog
 - [Repo Structure](#repo-structure)
 - [Database Structure](#database-structure)
@@ -95,8 +98,8 @@ Go to browser and request `https://localhost:5001`
 ![mvcmain](./DocFile/mvcmain.png)
 
 The main section shows the classes you just created!  
-Check out the demonstration video 👇👇👇
-<video src="./DocFile/mvcdemo.mp4" controls width="auto" height="600px"/>
+Check out the demonstration video 👇👇👇  
+[![mvcdemo](https://drive.fife.usercontent.google.com/u/0/d/12zTnMommy4Zy2i98V2B0CJsSL4kD8LgM=w200-h190-p-k-rw-v1-nu-iv1)](https://drive.google.com/file/d/12zTnMommy4Zy2i98V2B0CJsSL4kD8LgM/view?usp=sharing)
 
 ## Api
 The FrontEndWebsite(Asp.net MVC) is server side rendering by using `Razor` to display screen while I provided a web api to let front-end developer access this system.
